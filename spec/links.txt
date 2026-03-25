@@ -1,0 +1,30 @@
+
+https://learn.microsoft.com/en-us/dax/ dax specification
+
+https://github.com/jurgenfolz/PyDAXLexer/tree/master/resources/sample_dax_expressions dax query expressions
+
+https://github.com/MicrosoftDocs/query-docs/tree/main/query-languages/dax dax specification 
+
+https://learn.microsoft.com/en-us/rest/api/power-bi/datasets/execute-queries example of run dax queries for PB online
+
+https://github.com/PBI-DataVizzle/DAX some dax queries examples
+
+https://github.com/jurgenfolz/PyDAXLexer dax parser on python
+
+https://github.com/DaxStudio/DaxStudio/tree/master dax studio on C#. it have some csdl examples
+
+https://github.com/KiaraGrouwstra/dax-parser  Haskeleton dax parser
+
+https://github.com/bmsuisse/daxparser dax parser on python
+
+https://github.com/willianmh/dax-parser dax parser on kotlin java
+
+https://www.microsoftpressstore.com/articles/article.aspx?p=2982123 dax syntax with examples
+
+https://dax.do/ online dax runner
+
+https://github.com/AnttiRask/learning_dax/ some examples files for CALCULATE for PB
+
+
+
+

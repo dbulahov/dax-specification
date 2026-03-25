@@ -1,0 +1,279 @@
+EVALUATE
+	ROW(
+		"Amount", 'Financial Reporting'[Amount],
+		"Amount_FormatString", 'Financial Reporting'[Amount.FormatString]
+	)
+
+
+EVALUATE
+	TOPN(
+		501,
+		CALCULATETABLE(
+			FILTER(
+				KEEPFILTERS(
+					SUMMARIZE(
+						VALUES('Account'),
+						'Account'[Account Level 01.Key0],
+						'Account'[Account Level 01.Account Number],
+						'Account'[Account Level 02.Key0],
+						'Account'[Account Level 02.Account Number],
+						'Account'[Account Level 03.Key0],
+						'Account'[Account Level 03.Account Number],
+						'Account'[Account Level 04.Key0],
+						'Account'[Account Level 04.Account Number],
+						'Account'[Account Level 05.Key0],
+						'Account'[Account Level 05.Account Number],
+						'Account'[Account Level 06.Key0],
+						'Account'[Account Level 06.Account Number],
+						'Account'[Account Level 01],
+						'Account'[Account Level 02],
+						'Account'[Account Level 03],
+						'Account'[Account Level 04],
+						'Account'[Account Level 05],
+						'Account'[Account Level 06]
+					)
+				),
+				OR(
+					OR(
+						OR(
+							OR(
+								OR(
+									OR(
+										OR(
+											OR(
+												OR(
+													OR(
+														OR(
+															NOT(ISBLANK('Account'[Account Level 01.Key0])),
+															NOT(ISBLANK('Account'[Account Level 01.Account Number]))
+														),
+														NOT(ISBLANK('Account'[Account Level 02.Key0]))
+													),
+													NOT(ISBLANK('Account'[Account Level 02.Account Number]))
+												),
+												NOT(ISBLANK('Account'[Account Level 03.Key0]))
+											),
+											NOT(ISBLANK('Account'[Account Level 03.Account Number]))
+										),
+										NOT(ISBLANK('Account'[Account Level 04.Key0]))
+									),
+									NOT(ISBLANK('Account'[Account Level 04.Account Number]))
+								),
+								NOT(ISBLANK('Account'[Account Level 05.Key0]))
+							),
+							NOT(ISBLANK('Account'[Account Level 05.Account Number]))
+						),
+						NOT(ISBLANK('Account'[Account Level 06.Key0]))
+					),
+					NOT(ISBLANK('Account'[Account Level 06.Account Number]))
+				)
+			),
+			ALL('Account'[Account Level 01.Key0]),
+			ALL('Account'[Account Level 01])
+		),
+		'Account'[Account Level 01.Account Number],
+		1,
+		'Account'[Account Level 01],
+		1,
+		'Account'[Account Level 01.Key0],
+		1,
+		'Account'[Account Level 02.Account Number],
+		1,
+		'Account'[Account Level 02],
+		1,
+		'Account'[Account Level 02.Key0],
+		1,
+		'Account'[Account Level 03.Account Number],
+		1,
+		'Account'[Account Level 03],
+		1,
+		'Account'[Account Level 03.Key0],
+		1,
+		'Account'[Account Level 04.Account Number],
+		1,
+		'Account'[Account Level 04],
+		1,
+		'Account'[Account Level 04.Key0],
+		1,
+		'Account'[Account Level 05.Account Number],
+		1,
+		'Account'[Account Level 05],
+		1,
+		'Account'[Account Level 05.Key0],
+		1,
+		'Account'[Account Level 06.Account Number],
+		1,
+		'Account'[Account Level 06],
+		1,
+		'Account'[Account Level 06.Key0],
+		1
+	)
+
+ORDER BY
+	'Account'[Account Level 01.Account Number],
+	'Account'[Account Level 01],
+	'Account'[Account Level 01.Key0],
+	'Account'[Account Level 02.Account Number],
+	'Account'[Account Level 02],
+	'Account'[Account Level 02.Key0],
+	'Account'[Account Level 03.Account Number],
+	'Account'[Account Level 03],
+	'Account'[Account Level 03.Key0],
+	'Account'[Account Level 04.Account Number],
+	'Account'[Account Level 04],
+	'Account'[Account Level 04.Key0],
+	'Account'[Account Level 05.Account Number],
+	'Account'[Account Level 05],
+	'Account'[Account Level 05.Key0],
+	'Account'[Account Level 06.Account Number],
+	'Account'[Account Level 06],
+	'Account'[Account Level 06.Key0]
+
+
+EVALUATE
+	TOPN(
+		501,
+		FILTER(
+			KEEPFILTERS(SUMMARIZE(VALUES('Date'), 'Date'[Date.Key0], 'Date'[Date])),
+			NOT(ISBLANK('Date'[Date.Key0]))
+		),
+		'Date'[Date.Key0],
+		1,
+		'Date'[Date],
+		1
+	)
+
+ORDER BY
+	'Date'[Date.Key0], 'Date'[Date]
+
+
+
+
+EVALUATE
+	TOPN(
+		501,
+		FILTER(
+			KEEPFILTERS(SUMMARIZE(VALUES('Ship Date'), 'Ship Date'[Date.Key0], 'Ship Date'[Date])),
+			NOT(ISBLANK('Ship Date'[Date.Key0]))
+		),
+		'Ship Date'[Date.Key0],
+		1,
+		'Ship Date'[Date],
+		1
+	)
+
+ORDER BY
+	'Ship Date'[Date.Key0], 'Ship Date'[Date]
+
+
+
+
+EVALUATE
+	TOPN(
+		501,
+		CALCULATETABLE(
+			CALCULATETABLE(
+				FILTER(
+					KEEPFILTERS(
+						SUMMARIZE(VALUES('Ship Date'), 'Ship Date'[Month of Year.Key0], 'Ship Date'[Month of Year])
+					),
+					NOT(ISBLANK('Ship Date'[Month of Year.Key0]))
+				),
+				KEEPFILTERS(
+					FILTER(
+						KEEPFILTERS(
+							SUMMARIZE(
+								VALUES('Account'),
+								'Account'[Account Level 01.Key0],
+								'Account'[Account Level 02.Key0],
+								'Account'[Account Level 03.Key0],
+								'Account'[Account Level 04.Key0],
+								'Account'[Account Level 05.Key0],
+								'Account'[Account Level 06.Key0]
+							)
+						),
+						AND(
+							AND(
+								AND(
+									AND(
+										AND(
+											'Account'[Account Level 01.Key0] = 1,
+											'Account'[Account Level 02.Key0] = 2
+										),
+										'Account'[Account Level 03.Key0] = 3
+									),
+									'Account'[Account Level 04.Key0] = 4
+								),
+								ISBLANK('Account'[Account Level 05.Key0])
+							),
+							ISBLANK('Account'[Account Level 06.Key0])
+						)
+					)
+				)
+			),
+			ALL('Account'[Account Level 01.Key0]),
+			ALL('Account'[Account Level 01])
+		),
+		'Ship Date'[Month of Year.Key0],
+		1,
+		'Ship Date'[Month of Year],
+		1
+	)
+
+ORDER BY
+	'Ship Date'[Month of Year.Key0], 'Ship Date'[Month of Year]
+
+
+
+
+EVALUATE
+	TOPN(
+		501,
+		ADDCOLUMNS(
+			KEEPFILTERS(
+				FILTER(
+					KEEPFILTERS(SUMMARIZE(VALUES('Ship Date'), 'Ship Date'[Date.Key0], 'Ship Date'[Date])),
+					NOT(ISBLANK('Exchange Rates'[Average Rate]))
+				)
+			),
+			"Average_Rate", 'Exchange Rates'[Average Rate],
+			"Average_Rate_FormatString", 'Exchange Rates'[Average Rate.FormatString]
+		),
+		'Ship Date'[Date.Key0],
+		1,
+		'Ship Date'[Date],
+		1
+	)
+
+ORDER BY
+	'Ship Date'[Date.Key0], 'Ship Date'[Date]
+
+
+EVALUATE
+	TOPN(
+		1001,
+		ADDCOLUMNS(
+			KEEPFILTERS(
+				ADDCOLUMNS(
+					KEEPFILTERS(
+						FILTER(
+							KEEPFILTERS(VALUES('Location'[Location_LocationHierarchy_Location_Latitude])),
+							NOT(
+								ISBLANK(CALCULATE(SUM('Location'[Location_LocationHierarchy_Location])))
+							)
+						)
+					),
+					"SumLocation_LocationHierarchy_Location_Location_LocationHierarchy_Location_Latitude", CALCULATE(SUM('Location'[Location_LocationHierarchy_Location]))
+				)
+			),
+			"SumLocation_LocationHierarchy_Location", [SumLocation_LocationHierarchy_Location_Location_LocationHierarchy_Location_Latitude]
+		),
+		[SumLocation_LocationHierarchy_Location_Location_LocationHierarchy_Location_Latitude],
+		0,
+		'Location'[Location_LocationHierarchy_Location_Latitude],
+		1
+	)
+
+ORDER BY
+	[SumLocation_LocationHierarchy_Location_Location_LocationHierarchy_Location_Latitude] DESC,
+	'Location'[Location_LocationHierarchy_Location_Latitude]
